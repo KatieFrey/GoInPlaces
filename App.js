@@ -13,7 +13,8 @@ import {
   Text,
   View,
   TextInput,
-  onChangeText
+  onChangeText,
+  Button
 } from "react-native";
 
 // const instructions = Platform.select({
@@ -36,15 +37,15 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={{ width: 300, borderColor: "black", borderWidth: 1 }}
-          placeholder="An awesome place!"
-          value={this.state.placeName}
-          onChangeText={this.placeNameChangedHandler}
-        />
-        {/* <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text> */}
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.placeInput}
+            placeholder="An awesome place!"
+            value={this.state.placeName}
+            onChangeText={this.placeNameChangedHandler}
+          />
+          <Button title="Add" style={styles.placeButton} />
+        </View>
       </View>
     );
   }
@@ -53,18 +54,20 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    padding: 40,
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
+  inputContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
+  placeInput: {
+    width: "70%"
+  },
+  placeButton: {
+    width: "30%"
   }
 });
