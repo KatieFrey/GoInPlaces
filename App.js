@@ -17,6 +17,8 @@ import {
   Button
 } from "react-native";
 
+import ListItem from "./src/components/ListItem/ListItem";
+
 // const instructions = Platform.select({
 //   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
 //   android:
@@ -25,7 +27,8 @@ import {
 // });
 export default class App extends Component {
   state = {
-    placeName: ""
+    placeName: "",
+    places: []
   };
 
   placeNameChangedHandler = event => {
@@ -34,7 +37,22 @@ export default class App extends Component {
     });
   };
 
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === "") {
+      return;
+    }
+
+    this.setState(prevState => {
+      return {
+        places: prevState.places.concat(prevState.placeName)
+      };
+    });
+  };
+
   render() {
+    const placesOutput = this.state.places.map((place, index) => (
+      <ListItem key={index} placeName={place} />
+    ));
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -44,8 +62,13 @@ export default class App extends Component {
             value={this.state.placeName}
             onChangeText={this.placeNameChangedHandler}
           />
-          <Button title="Add" style={styles.placeButton} />
+          <Button
+            title="Add"
+            style={styles.placeButton}
+            onPress={this.placeSubmitHandler}
+          />
         </View>
+        <View style={styles.listContainer}>{placesOutput}</View>
       </View>
     );
   }
@@ -69,5 +92,8 @@ const styles = StyleSheet.create({
   },
   placeButton: {
     width: "30%"
+  },
+  listContainer: {
+    width: "100%"
   }
 });
