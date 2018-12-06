@@ -20,12 +20,6 @@ import {
 import PlaceInput from "./src/components/PlaceInput/PlaceInput";
 import PlaceList from "./src/components/PlaceList/PlaceLIst";
 
-// const instructions = Platform.select({
-//   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-//   android:
-//     "Double tap R on your keyboard to reload,\n" +
-//     "Shake or press menu button for dev menu"
-// });
 export default class App extends Component {
   state = {
     places: []
@@ -39,11 +33,24 @@ export default class App extends Component {
     });
   };
 
+  placeDeletedHandler = index => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter((place, i) => {
+          return i !== index;
+        })
+      };
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <PlaceInput onPlaceAdded={this.placeAddedHandler} />
-        <PlaceList places={this.state.places} />
+        <PlaceList
+          places={this.state.places}
+          onItemDeleted={this.placeDeletedHandler}
+        />
       </View>
     );
   }
