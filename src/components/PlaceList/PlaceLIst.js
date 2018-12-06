@@ -9,7 +9,8 @@ const PlaceList = props => {
       data={props.places}
       renderItem={info => (
         <ListItem
-          placeName={info.item.value}
+          placeName={info.item.name}
+          placeImage={info.item.image}
           onItemPressed={() => props.onItemDeleted(info.item.key)}
         />
       )}
@@ -19,7 +20,8 @@ const PlaceList = props => {
 
 const styles = StyleSheet.create({
   listContainer: {
-    width: "100%"
+    width: "100%",
+    height: null
   }
 });
 

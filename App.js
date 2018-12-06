@@ -19,6 +19,7 @@ import {
 
 import PlaceInput from "./src/components/PlaceInput/PlaceInput";
 import PlaceList from "./src/components/PlaceList/PlaceLIst";
+import placeImage from "./assets/images/tropical-destination.jpg";
 
 export default class App extends Component {
   state = {
@@ -29,8 +30,9 @@ export default class App extends Component {
     this.setState(prevState => {
       return {
         places: prevState.places.concat({
-          key: Math.random(),
-          value: placeName
+          key: `${Math.random()}`,
+          name: placeName,
+          image: placeImage
         })
       };
     });
